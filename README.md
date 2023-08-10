@@ -29,16 +29,16 @@ Analytics helps you measure your users, product, and business. It unlocks insigh
 3. **Explore your data** by creating metrics (for example, new signups, retention cohorts, and revenue generation).
     - The best Segment companies use retention cohorts to measure product market fit. Netflix has 70% paid retention after 12 months, 30% after 7 years.
 
-[Segment](https://segment.com) collects analytics data and allows you to send it to more than 250 apps (such as Google Analytics, Mixpanel, Optimizely, Facebook Ads, Slack, Sentry) just by flipping a switch. You only need one Segment code snippet, and you can turn integrations on and off at will, with no additional code. [Sign up with Segment today](https://app.segment.com/signup).
+[Persio](https://persio.io) collects analytics data and allows you to send it to more than 250 apps (such as Google Analytics, Mixpanel, Optimizely, Facebook Ads, Slack, Sentry) just by flipping a switch. You only need one Segment code snippet, and you can turn integrations on and off at will, with no additional code. [Sign up with Persio today](https://app.persio.io/).
 
 ### Why?
-1. **Power all your analytics apps with the same data**. Instead of writing code to integrate all of your tools individually, send data to Segment, once.
+1. **Power all your analytics apps with the same data**. Instead of writing code to integrate all of your tools individually, send data to Persio, once.
 
-2. **Install tracking for the last time**. We're the last integration you'll ever need to write. You only need to instrument Segment once. Reduce all of your tracking code and advertising tags into a single set of API calls.
+2. **Install tracking for the last time**. We're the last integration you'll ever need to write. You only need to instrument Persio once. Reduce all of your tracking code and advertising tags into a single set of API calls.
 
-3. **Send data from anywhere**. Send Segment data from any device, and we'll transform and send it on to any tool.
+3. **Send data from anywhere**. Send Persio data from any device, and we'll transform and send it on to any tool.
 
-4. **Query your data in SQL**. Slice, dice, and analyze your data in detail with Segment SQL. We'll transform and load your customer behavioral data directly from your apps into Amazon Redshift, Google BigQuery, or Postgres. Save weeks of engineering time by not having to invent your own data warehouse and ETL pipeline.
+4. **Query your data in SQL**. Slice, dice, and analyze your data in detail with Persio SQL. We'll transform and load your customer behavioral data directly from your apps into Amazon Redshift, Google BigQuery, or Postgres. Save weeks of engineering time by not having to invent your own data warehouse and ETL pipeline.
 
     For example, you can capture data on any app:
     ```js
