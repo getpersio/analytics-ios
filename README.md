@@ -95,7 +95,7 @@ let package = Package(
         // Add a package containing Analytics as the name along with the git url
         .package(
             name: "Segment",
-            url: "git@github.com:segmentio/analytics-ios.git"
+            url: "git@github.com:getpersio/analytics-ios.git"
         )
     ],
     targets: [

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "Persio-Analytics"
   s.module_name      = "Persio"
-  s.version          = "4.1.8"
+  s.version          = "4.1.9"
   s.summary          = "The hassle-free way to add analytics to your iOS app."
 
   s.description      = <<-DESC
