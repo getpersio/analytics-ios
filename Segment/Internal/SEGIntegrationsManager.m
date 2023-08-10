@@ -103,7 +103,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
         self.serialQueue = seg_dispatch_queue_create_specific("io.segment.analytics", DISPATCH_QUEUE_SERIAL);
         self.messageQueue = [[NSMutableArray alloc] init];
         self.httpClient = [[SEGHTTPClient alloc] initWithRequestFactory:configuration.requestFactory];
-        
+
         self.userDefaultsStorage = [[SEGUserDefaultsStorage alloc] initWithDefaults:[NSUserDefaults standardUserDefaults] namespacePrefix:nil crypto:configuration.crypto];
         #if TARGET_OS_TV
             self.fileStorage = [[SEGFileStorage alloc] initWithFolder:[SEGFileStorage cachesDirectoryURL] crypto:configuration.crypto];
@@ -334,7 +334,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
         [self.fileStorage setString:anonymousId forKey:kSEGAnonymousIdFilename];
 #endif
     }
-    
+
     return anonymousId;
 }
 
@@ -364,7 +364,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
         _cachedSettings = [self.fileStorage dictionaryForKey:kSEGCachedSettingsFilename] ?: @{};
 #endif
     }
-    
+
     return _cachedSettings;
 }
 
@@ -375,7 +375,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
         // [@{} writeToURL:settingsURL atomically:YES];
         return;
     }
-    
+
 #if TARGET_OS_TV
     [self.userDefaultsStorage setDictionary:_cachedSettings forKey:kSEGCachedSettingsFilename];
 #else
@@ -403,7 +403,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
     if (apiHost) {
         [SEGUtils saveAPIHost:apiHost];
     }
-    
+
     seg_dispatch_specific_sync(_serialQueue, ^{
         if (self.initialized) {
             return;
@@ -419,7 +419,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
                 if (integration != nil) {
                     self.integrations[key] = integration;
                     self.registeredIntegrations[key] = @NO;
-                    
+
                     // setup integration middleware
                     NSArray<id<SEGMiddleware>> *middleware = [self middlewareForIntegrationKey:key];
                     self.integrationMiddleware[key] = [[SEGMiddlewareRunner alloc] initWithMiddleware:middleware];
@@ -476,7 +476,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
         [self setCachedSettings:previouslyCachedSettings];
         [self configureEdgeFunctions:previouslyCachedSettings];
     }
-    
+
     seg_dispatch_specific_async(_serialQueue, ^{
         if (self.settingsRequest) {
             return;
@@ -502,7 +502,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
                         } else {
                             newSettings[@"integrations"] = @{kSEGSegmentDestinationName: [self segmentSettings]};
                         }
-                        
+
                         [self setCachedSettings:newSettings];
                         // don't configure edge functions here.  it'll do the right thing on it's own.
                     } else {
@@ -522,13 +522,13 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
 
 + (BOOL)isIntegration:(NSString *)key enabledInOptions:(NSDictionary *)options
 {
-    // If the event is in the tracking plan, it should always be sent to api.segment.io.
+    // If the event is in the tracking plan, it should always be sent to api.persio.io.
     if ([kSEGSegmentDestinationName isEqualToString:key]) {
         return YES;
     }
     if (options[key]) {
         id value = options[key];
-        
+
         // it's been observed that customers sometimes override this with
         // value's that aren't bool types.
         if ([value isKindOfClass:[NSNumber class]]) {
@@ -552,7 +552,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
 
 + (BOOL)isTrackEvent:(NSString *)event enabledForIntegration:(NSString *)key inPlan:(NSDictionary *)plan
 {
-    // Whether the event is enabled or disabled, it should always be sent to api.segment.io.
+    // Whether the event is enabled or disabled, it should always be sent to api.persio.io.
     if ([key isEqualToString:kSEGSegmentDestinationName]) {
         return YES;
     }
@@ -586,7 +586,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
 {
     NSString *selectorString = NSStringFromSelector(selector);
     SEGEventType result = SEGEventTypeUndefined;
-    
+
     if ([selectorString hasPrefix:@"identify"]) {
         result = SEGEventTypeIdentify;
     } else if ([selectorString hasPrefix:@"track"]) {
@@ -631,7 +631,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
         SEGLog(@"Not sending call to %@ because it is disabled in options.", key);
         return;
     }
-    
+
     SEGEventType eventType = [self eventTypeFromSelector:selector];
     if (eventType == SEGEventTypeTrack) {
         SEGTrackPayload *eventPayload = arguments[0];
@@ -664,7 +664,7 @@ NSString *const kSEGCachedSettingsFilename = @"analytics.settings.v2.plist";
             }
         }
     }
-    
+
     SEGLog(@"Running: %@ with arguments %@ on integration: %@", NSStringFromSelector(selector), newArguments, key);
     NSInvocation *invocation = [self invocationForSelector:selector arguments:newArguments];
     [invocation invokeWithTarget:integration];

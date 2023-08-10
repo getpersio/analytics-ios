@@ -3,11 +3,11 @@
 #import "SEGAnalyticsUtils.h"
 #import "SEGUtils.h"
 
-#define SEGMENT_CDN_BASE [NSURL URLWithString:@"https://cdn-settings.segment.com/v1"]
+#define SEGMENT_CDN_BASE [NSURL URLWithString:@"https://cdn.persio.io/v1"]
 
 static const NSUInteger kMaxBatchSize = 475000; // 475KB
 
-NSString * const kSegmentAPIBaseHost = @"https://api.segment.io/v1";
+NSString * const kSegmentAPIBaseHost = @"https://api.persio.io/v1";
 
 @implementation SEGHTTPClient
 
